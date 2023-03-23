@@ -5,7 +5,8 @@ on:
     branches:
       - main
       - master
-  pull_request: {}
+  pull_request:
+    types: [synchronize, opened, reopened, labeled, unlabeled]
 
 concurrency:
   group: ci-${{ github.head_ref || github.ref }}
@@ -25,7 +26,7 @@ jobs:
         run: copywrite headers --plan
 
   changelog-checker:
-    if: "!contains(github.event.pull_request.labels.*.name, 'pr/no-changeset')"
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'pr/no-changeset') }}
     runs-on: ubuntu-latest
 
     steps:
