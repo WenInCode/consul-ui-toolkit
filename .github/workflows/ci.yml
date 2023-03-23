@@ -5,8 +5,7 @@ on:
     branches:
       - main
       - master
-  pull_request:
-    types: [synchronize, opened, reopened, labeled, unlabeled]
+  pull_request: {}
 
 concurrency:
   group: ci-${{ github.head_ref || github.ref }}
