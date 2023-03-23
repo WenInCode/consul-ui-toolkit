@@ -26,7 +26,7 @@ jobs:
         run: copywrite headers --plan
 
   changelog-checker:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'pr/no-changeset') || github.ref != 'changeset-release/main'}}
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'pr/no-changeset') && github.ref != 'changeset-release/main'}}
     runs-on: ubuntu-latest
 
     steps:
