@@ -3,6 +3,8 @@ name: Changelog Check
 on:
   pull_request:
     types: [synchronize, opened, reopened, labeled, unlabeled]
+    branches-ignore:
+      - 'changeset-release/main'
 
 concurrency:
   group: changelog-check-${{ github.head_ref || github.ref }}
@@ -10,7 +12,7 @@ concurrency:
 
 jobs:
   changelog-checker:
-    if: ${{ !contains(github.event.pull_request.labels.*.name, 'pr/no-changeset') && github.ref_name != 'changeset-release/main'}}
+    if: ${{ !contains(github.event.pull_request.labels.*.name, 'pr/no-changeset') }}
     runs-on: ubuntu-latest
 
     steps:
